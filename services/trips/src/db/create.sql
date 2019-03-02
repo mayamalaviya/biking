@@ -1,0 +1,2 @@
+CREATE DATABASE trips_dev;
+CREATE DATABASE trips_test;
