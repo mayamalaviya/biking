@@ -1,5 +1,6 @@
 const express = require('express');
-const logger = require('morgan');
+const morgan = require('morgan');
+const winston = require('../config/winston');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
@@ -14,7 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
-if (process.env.NODE_ENV !== 'test') { app.use(logger('dev')); }
+if (process.env.NODE_ENV !== 'test') { app.use(morgan('combined', { stream: winston.stream })); }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -30,6 +31,10 @@ app.use((req, res, next) => {
 /* eslint-disable no-unused-vars */
 app.use((err, req, res, next) => {
   const message = req.app.get('env') === 'development' ? err : {};
+
+  // add this line to include winston logging
+  winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+
   res.status(err.status || 500);
   res.json({
     status: 'error',
