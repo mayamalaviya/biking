@@ -1,15 +1,16 @@
 process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
+
 const should = chai.should();
 const chaiHttp = require('chai-http');
+
 chai.use(chaiHttp);
 
 const server = require('../../src/app');
 const knex = require('../../src/db/connection');
 
 describe('routes : users', () => {
-
   beforeEach(() => {
     return knex.migrate.rollback()
     .then(() => { return knex.migrate.latest(); })
@@ -25,8 +26,8 @@ describe('routes : users', () => {
       chai.request(server)
       .post('/users/register')
       .send({
-        username: 'john',
-        password: 'doe'
+        username: 'maya',
+        password: 'malaviya',
       })
       .end((err, res) => {
         should.not.exist(err);
@@ -45,8 +46,8 @@ describe('routes : users', () => {
       chai.request(server)
       .post('/users/login')
       .send({
-        username: 'michael',
-        password: 'herman'
+        username: 'maya',
+        password: 'malaviya',
       })
       .end((err, res) => {
         should.not.exist(err);
@@ -64,7 +65,7 @@ describe('routes : users', () => {
       .post('/users/login')
       .send({
         username: 'not',
-        password: 'valid'
+        password: 'valid',
       })
       .end((err, res) => {
         should.exist(err);
@@ -78,8 +79,8 @@ describe('routes : users', () => {
       chai.request(server)
       .post('/users/login')
       .send({
-        username: 'michael',
-        password: 'incorrect'
+        username: 'maya',
+        password: 'incorrect',
       })
       .end((err, res) => {
         should.exist(err);
@@ -96,8 +97,8 @@ describe('routes : users', () => {
       chai.request(server)
       .post('/users/login')
       .send({
-        username: 'michael',
-        password: 'herman'
+        username: 'maya',
+        password: 'malaviya',
       })
       .end((error, response) => {
         should.not.exist(error);
@@ -127,5 +128,4 @@ describe('routes : users', () => {
       });
     });
   });
-
 });
