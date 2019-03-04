@@ -19,7 +19,7 @@ const options = {
 };
 
 // instantiate a new winston logger with settings defined above
-const logger = new winston.logger({
+let logger = winston.createLogger({
   transports: [
     new winston.transports.File(options.file),
     new winston.transports.Console(options.console),
