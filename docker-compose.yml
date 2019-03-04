@@ -77,5 +77,8 @@ services:
     depends_on:
       users-service:
         condition: service_started
+      trips-service:
+        condition: service_started
     links:
       - users-service
+      - trips-service
