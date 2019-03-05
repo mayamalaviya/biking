@@ -21,7 +21,7 @@ class App extends Component {
       flashMessages: [],
       isAuthenticated: false
     }
-    this.searchTrip('land before time')
+    this.searchTrips('land before time')
     this.registerUser = this.registerUser.bind(this)
     this.loginUser = this.loginUser.bind(this)
     this.logoutUser = this.logoutUser.bind(this)
@@ -30,7 +30,7 @@ class App extends Component {
     this.saveTrip = this.saveTrip.bind(this)
     this.getTrips = this.getTrips.bind(this)
   }
-  searchTrip(term) {
+  searchTrips(term) {
     const options = {
         url: 'http://localhost:3001/trips/user',
         method: 'get',
@@ -42,21 +42,6 @@ class App extends Component {
     return axios(options)
     .then((res) => {
         this.setState({ trips: res.data.data });
-    })
-    .catch((err) => { console.log(err); })
-  }
-  getTrips() {
-    const options = {
-      url: 'http://localhost:3001/trips/user',
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${window.localStorage.authToken}`
-      }
-    };
-    return axios(options)
-    .then((res) => {
-      this.setState({ saved: res.data.data });
     })
     .catch((err) => { console.log(err); })
   }
@@ -171,7 +156,7 @@ class App extends Component {
             isAuthenticated
             ? <div className="container text-center">
                 <h1>Trip Search</h1>
-                <SearchBar searchTrip={this.searchTrip.bind(this)} />
+                <SearchBar searchTrips={this.searchTrips.bind(this)} />
                 <a href="" onClick={this.logoutUser}>Logout</a>&nbsp;&#124;&nbsp;<Link to='/collection'>Collection</Link>
                 <br/><br/><br/>
                 <TripList

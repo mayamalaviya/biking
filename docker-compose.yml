@@ -13,6 +13,19 @@ services:
     healthcheck:
       test: exit 0
   
+  # Trips DB
+  trips-db:
+    container_name: trips-db
+    build: ./services/trips/src/db
+    ports:
+      - '5434:5432' # expose ports - HOST:CONTAINER
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: exit 0
+  
+  # Users Service
   users-service:
     container_name: users-service
     build: ./services/users/
@@ -32,37 +45,28 @@ services:
     links:
       - users-db
 
-  # Trips DB
-  trips-db:
-    container_name: trips-db
-    build: ./services/trips/src/db
-    ports:
-      - '5434:5432' # expose ports - HOST:CONTAINER
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    healthcheck:
-      test: exit 0
-  
-  # Trips API
+  # Trips Service
   trips-service:
     container_name: trips-service
     build: ./services/trips/
     volumes:
-      - './services/trips:/trips/src/app'
-      - './services/trips/package.json:/trips/src/package.json'
+      - './services/trips:/usr/src/app'
+      - './services/trips/package.json:/usr/src/package.json'
     ports:
       - '3001:3000' # expose ports - HOST:CONTAINER
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/trips_dev
-      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/trips_test
+      - DATABASE_URL=postgres://postgres:postgres@trips-db:5434/trips_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@trips-db:5434/trips_test
       - NODE_ENV=${NODE_ENV}
       - TOKEN_SECRET=changeme
     depends_on:
       trips-db:
         condition: service_healthy
+      users-service: 
+        condition: service_started
     links:
       - trips-db
+      - users-service
 
   web-service:
     container_name: web-service
@@ -72,6 +76,25 @@ services:
       - '/usr/src/app/node_modules'
     ports:
       - '3007:3006' # expose ports - HOST:CONTAINER
+    environment:
+      - NODE_ENV=${NODE_ENV}
+    depends_on:
+      users-service:
+        condition: service_started
+      trips-service:
+        condition: service_started
+    links:
+      - users-service
+      - trips-service
+
+  swagger:
+    container_name: swagger
+    build: ./services/trips/swagger/
+    volumes:
+      - './services/trips/swagger:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '3003:3001' # expose ports - HOST:CONTAINER
     environment:
       - NODE_ENV=${NODE_ENV}
     depends_on:

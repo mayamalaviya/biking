@@ -1,24 +1,28 @@
-const path = require('path');
+const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+const eslint = require('gulp-eslint');
 
-module.exports = {
-  development: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL,
-    migrations: {
-      directory: path.join(__dirname, 'src', 'db', 'migrations')
-    },
-    seeds: {
-      directory: path.join(__dirname, 'src', 'db', 'seeds')
-    }
-  },
-  test: {
-    client: 'pg',
-    connection: process.env.DATABASE_TEST_URL,
-    migrations: {
-      directory: path.join(__dirname, 'src', 'db', 'migrations')
-    },
-    seeds: {
-      directory: path.join(__dirname, 'src', 'db', 'seeds')
-    }
-  }
-};
+/*
+tasks
+ */
+
+gulp.task('start', () => {
+  nodemon({
+    script: './src/server',
+    ext: 'js html',
+    tasks: ['lint'],
+  });
+});
+
+gulp.task('lint', () => (
+  gulp.src(['src/**/*.js', '!node_modules/**'])
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError())
+));
+
+/*
+default
+ */
+
+gulp.task('default', ['start', 'lint']);
