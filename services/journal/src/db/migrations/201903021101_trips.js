@@ -2,9 +2,9 @@ exports.up = (knex) => {
   return knex.schema.createTable('trips', (table) => {
     table.increments();
     table.integer('user_id').notNullable();
-    table.string('month').notNullable();
-    table.string('year').notNullable();
-    table.string('duration').notNullable();
+    table.string('trip').notNullable();
+    table.string('summary').notNullable();
+    table.string('entry').notNullable();
 
     table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
   });

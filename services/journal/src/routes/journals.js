@@ -10,15 +10,15 @@ router.get('/ping', (req, res) => {
 });
 
 /*
-get trips by user
+get journals by user
  */
 /* eslint-disable no-param-reassign */
 router.get('/user', routeHelpers.ensureAuthenticated, (req, res, next) => {
-  return queries.getSavedTrips(parseInt(req.user, 10))
-  .then((trips) => {
+  return queries.getSavedJournals(parseInt(req.user, 10))
+  .then((journals) => {
     res.json({
       status: 'success',
-      data: trips,
+      data: journals,
     });
   })
   .catch((err) => { return next(err); });
@@ -26,15 +26,15 @@ router.get('/user', routeHelpers.ensureAuthenticated, (req, res, next) => {
 /* eslint-enable no-param-reassign */
 
 /*
-add new trip
+add new journal
  */
 router.post('/', routeHelpers.ensureAuthenticated, (req, res, next) => {
   req.body.user_id = req.user;
-  return queries.addTrip(req.body)
+  return queries.addJournal(req.body)
   .then(() => {
     res.json({
       status: 'success',
-      data: 'Trip Added!',
+      data: 'Journal Added!',
     });
   })
   .catch((err) => { return next(err); });
