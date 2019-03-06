@@ -1,10 +1,13 @@
 exports.seed = (knex, Promise) => {
-  return knex('trips').del()
+  return knex('locations').del()
   .then(() => {
     return Promise.join(
-      knex('trips').insert({
-        user_id: 1,
-        title: 'Jurassic Park',
+      knex('locations').insert({
+        name: 'Cape Cod',
+        state: 'MA',
+        country: 'USA',
+        GPS: null,
+        notes: null,
       })  // eslint-disable-line
     );
   })
