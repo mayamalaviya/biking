@@ -9,10 +9,10 @@ const EquipmentList = (props) => {
           item={equipment.item}
           make={equipment.make}
           model={equipment.model}
-          year_bought={equipment.year_bought}
-          primary_user={equipment.primary_user}
-          usage_quantity={equipment.usage_quantity}
-          usage_unit={equipment.usage_unit}
+          yearBought={equipment.year_bought}
+          primaryUser={equipment.primary_user}
+          usageQuantity={equipment.usage_quantity}
+          usageUnit={equipment.usage_unit}
           saveEquipment={props.saveEquipment}
         />
       ))}

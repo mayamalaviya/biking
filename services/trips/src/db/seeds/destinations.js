@@ -3,6 +3,7 @@ exports.seed = (knex, Promise) => {
   .then(() => {
     return Promise.join(
       knex('destinations').insert({
+        name: 'Boogaloo',
         added_by: 'Maya',
         trip_id: '1',
         summary: 'Campground',

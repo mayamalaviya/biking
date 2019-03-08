@@ -21,7 +21,11 @@ function getEquipments() {
 }
 
 function getDestinations() {
-  return knex('equipment').select('*');
+  return knex('destinations').select('*');
+}
+
+function getTrips() {
+  return knex('trips').select('*');
 }
 
 module.exports = {
@@ -31,4 +35,5 @@ module.exports = {
   addTrip,
   addDestination,
   getDestinations,
+  getTrips,
 };

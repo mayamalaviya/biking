@@ -13,7 +13,7 @@ router.get('/ping', (req, res) => {
 get trips by user
  */
 /* eslint-disable no-param-reassign */
-router.get('/user', routeHelpers.ensureAuthenticated, (req, res, next) => {
+router.get('/trips/user', routeHelpers.ensureAuthenticated, (req, res, next) => {
   return queries.getSavedTrips(parseInt(req.user, 10))
   .then((trips) => {
     res.json({
@@ -35,10 +35,32 @@ router.get('/equipment', (req, res, next) => {
   })
   .catch((err) => { return next(err); });
 });
+
+router.get('/trips', (req, res, next) => {
+  return queries.getTrips()
+  .then((trips) => {
+    res.json({
+      status: 'success',
+      data: trips,
+    });
+  })
+  .catch((err) => { return next(err); });
+});
+
+router.get('/destinations', (req, res, next) => {
+  return queries.getDestinations()
+  .then((destinations) => {
+    res.json({
+      status: 'success',
+      data: destinations,
+    });
+  })
+  .catch((err) => { return next(err); });
+});
 /*
 add new trip
  */
-router.post('/', routeHelpers.ensureAuthenticated, (req, res, next) => {
+router.post('/trips', routeHelpers.ensureAuthenticated, (req, res, next) => {
   req.body.user_id = req.user;
   return queries.addTrip(req.body)
   .then(() => {
