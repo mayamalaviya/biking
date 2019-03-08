@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-
+  # Users DB
   users-db:
     container_name: users-db
     build: ./services/users/src/db
@@ -12,19 +12,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     healthcheck:
       test: exit 0
-  
-  # Trips DB
-  trips-db:
-    container_name: trips-db
-    build: ./services/trips/src/db
-    ports:
-      - '5434:5432' # expose ports - HOST:CONTAINER
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    healthcheck:
-      test: exit 0
-  
+
   # Users Service
   users-service:
     container_name: users-service
@@ -44,7 +32,20 @@ services:
         condition: service_healthy
     links:
       - users-db
+ 
 
+  # Trips DB
+  trips-db:
+    container_name: trips-db
+    build: ./services/trips/src/db
+    ports:
+      - '5434:5432' # expose ports - HOST:CONTAINER
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: exit 0
+  
   # Trips Service
   trips-service:
     container_name: trips-service
@@ -55,8 +56,8 @@ services:
     ports:
       - '3001:3000' # expose ports - HOST:CONTAINER
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@trips-db:5434/trips_dev
-      - DATABASE_TEST_URL=postgres://postgres:postgres@trips-db:5434/trips_test
+      - DATABASE_URL=postgres://postgres:postgres@trips-db:5432/trips_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@trips-db:5432/trips_test
       - NODE_ENV=${NODE_ENV}
       - TOKEN_SECRET=changeme
     depends_on:

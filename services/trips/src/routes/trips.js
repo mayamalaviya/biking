@@ -25,6 +25,16 @@ router.get('/user', routeHelpers.ensureAuthenticated, (req, res, next) => {
 });
 /* eslint-enable no-param-reassign */
 
+router.get('/equipment', (req, res, next) => {
+  return queries.getEquipments()
+  .then((equipments) => {
+    res.json({
+      status: 'success',
+      data: equipments,
+    });
+  })
+  .catch((err) => { return next(err); });
+});
 /*
 add new trip
  */

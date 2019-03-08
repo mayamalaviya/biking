@@ -11,17 +11,24 @@ import RegisterForm from './components/RegisterForm';
 import FlashMessages from './components/FlashMessages';
 import NotFound from './components/NotFound';
 import SavedTrips from './components/SavedTrips';
+import DestinationForm from './components/DestinationForm';
+import EquipmentForm from './components/EquipmentForm';
+import EquipmentList from './components/EquipmentList';
+import LocationForm from './components/LocationForm';
+import TripForm from './components/TripForm';
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
       trips: [],
+      equipments: [],
+      locations: [],
+      destinations: [],
       saved: [],
       flashMessages: [],
       isAuthenticated: false
     }
-    this.searchTrips('land before time')
     this.registerUser = this.registerUser.bind(this)
     this.loginUser = this.loginUser.bind(this)
     this.logoutUser = this.logoutUser.bind(this)
@@ -29,10 +36,16 @@ class App extends Component {
     this.createFlashMessage = this.createFlashMessage.bind(this)
     this.saveTrip = this.saveTrip.bind(this)
     this.getTrips = this.getTrips.bind(this)
+    this.saveDestination = this.saveDestination.bind(this)
+    this.saveEquipment = this.saveEquipment.bind(this)
+    this.saveLocation = this.saveLocation.bind(this)
+    this.getDestinations = this.getDestinations.bind(this)
+    this.getEquipment = this.getEquipment.bind(this)
+    this.getLocations = this.getLocations.bind(this)
   }
   searchTrips(term) {
     const options = {
-        url: 'http://localhost:3001/trips/user',
+        url: 'http://localhost:3001/user',
         method: 'get',
         headers: {
            'Content-Type': 'application/json',
@@ -97,6 +110,7 @@ class App extends Component {
       this.createFlashMessage('You successfully logged in! Welcome!')
       this.props.history.push('/')
       this.getTrips()
+      this.getEquipment()
     })
     .catch((error) => {
       callback('Something went wrong')
@@ -128,9 +142,102 @@ class App extends Component {
     .then((res) => { this.getTrips() })
     .catch((error) => { console.log(error); })
   }
+  saveDestination (destination) {
+    const options = {
+      url: 'http://localhost:3001/destinations',
+      method: 'post',
+      data: {
+        title: destination
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.authToken}`
+      }
+    };
+    return axios(options)
+    .then((res) => { this.getDestinations() })
+    .catch((error) => { console.log(error); })
+  }
+  getDestinations() {
+    const options = {
+      url: 'http://localhost:3001/destinations',
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.authToken}`
+      }
+    };
+    return axios(options)
+    .then((res) => {
+      this.setState({ saved: res.data.data });
+    })
+    .catch((err) => { console.log(err); })
+  }
+  saveEquipment (equipment) {
+    const options = {
+      url: 'http://localhost:3001/equipment',
+      method: 'post',
+      data: {
+        title: equipment
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.authToken}`
+      }
+    };
+    return axios(options)
+    .then((res) => { this.getEquipment() })
+    .catch((error) => { console.log(error); })
+  }
+  getEquipment() {
+    const options = {
+      url: 'http://localhost:3001/equipment',
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.authToken}`
+      }
+    };
+    return axios(options)
+    .then((res) => {
+      this.setState({ saved: res.data.data });
+    })
+    .catch((err) => { console.log(err); })
+  }
+  saveLocation (locations) {
+    const options = {
+      url: 'http://localhost:3001/locations',
+      method: 'post',
+      data: {
+        title: locations
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.authToken}`
+      }
+    };
+    return axios(options)
+    .then((res) => { this.getLocations() })
+    .catch((error) => { console.log(error); })
+  }
+  getLocations() {
+    const options = {
+      url: 'http://localhost:3001/locations',
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.authToken}`
+      }
+    };
+    return axios(options)
+    .then((res) => {
+      this.setState({ saved: res.data.data });
+    })
+    .catch((err) => { console.log(err); })
+  }
   getTrips() {
     const options = {
-      url: 'http://localhost:3001/trips/user',
+      url: 'http://localhost:3001/user',
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
@@ -184,7 +291,48 @@ class App extends Component {
               createFlashMessage={this.createFlashMessage}
               loginUser={this.loginUser} />
           )} />
+          <Route path='/equipment' render={() => (
+            <EquipmentList
+              equipments={this.state.equipments}
+              isAuthenticated={isAuthenticated}
+              getCurrentUser={this.getCurrentUser}
+            />
+          )} />
+          <Route path='/equipment/create' render={() => (
+             <EquipmentForm
+              createFlashMessage={this.createFlashMessage}
+              saved={this.state.saved} />
+            
+          )} />
+          <Route path='/destinations/create' render={() => (
+            isAuthenticated
+            ? <DestinationForm
+              createFlashMessage={this.createFlashMessage}
+              saved={this.state.saved} />
+            : <Redirect to={{ pathname: '/login' }} />
+          )} />
+          <Route path='/locations/create' render={() => (
+            isAuthenticated
+            ? <LocationForm
+              createFlashMessage={this.createFlashMessage}
+              saved={this.state.saved} />
+            : <Redirect to={{ pathname: '/login' }} />
+          )} />
+          <Route path='/trips/create' render={() => (
+            isAuthenticated
+            ? <TripForm
+              createFlashMessage={this.createFlashMessage}
+              saved={this.state.saved} />
+            : <Redirect to={{ pathname: '/login' }} />
+          )} />
           <Route path='/collection' render={() => (
+            isAuthenticated
+            ? <SavedTrips
+              createFlashMessage={this.createFlashMessage}
+              saved={this.state.saved} />
+            : <Redirect to={{ pathname: '/login' }} />
+          )} />
+          <Route path='/trips' render={() => (
             isAuthenticated
             ? <SavedTrips
               createFlashMessage={this.createFlashMessage}
