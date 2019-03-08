@@ -22,7 +22,7 @@ class App extends Component {
     super(props)
     this.state = {
       trips: [],
-      equipments: [],
+      equipment: [],
       destinations: [],
       saved: [],
       flashMessages: [],
@@ -36,8 +36,8 @@ class App extends Component {
     this.saveTrip = this.saveTrip.bind(this)
     this.getTrips = this.getTrips.bind(this)
     this.saveDestination = this.saveDestination.bind(this)
-    this.saveEquipment = this.saveEquipment.bind(this)
     this.getDestinations = this.getDestinations.bind(this)
+    this.saveEquipment = this.saveEquipment.bind(this)
     this.getEquipment = this.getEquipment.bind(this)
   }
 
@@ -88,6 +88,7 @@ class App extends Component {
       this.props.history.push('/')
       this.getTrips()
       this.getEquipment()
+      this.getDestinations()
     })
     .catch((error) => {
       callback('Something went wrong')
@@ -165,7 +166,7 @@ class App extends Component {
       url: 'http://localhost:3001/destinations',
       method: 'post',
       data: {
-        added_by: this.getCurrentUser(),
+        addedBy: this.getCurrentUser(),
         name: destination.name,
         summary: destination.summary,
         detail: destination.detail,
@@ -199,7 +200,13 @@ class App extends Component {
       url: 'http://localhost:3001/equipment',
       method: 'post',
       data: {
-        title: equipment
+        item: equipment.item,
+        make: equipment.make,
+        model: equipment.model,
+        yearBought: equipment.yearBought,
+        primaryUser: equipment.primaryUser,
+        usageQuantity: equipment.usageQuantity,
+        usageUnit: equipment.usageUnit,
       },
       headers: {
         'Content-Type': 'application/json',
@@ -267,24 +274,21 @@ class App extends Component {
               createFlashMessage={this.createFlashMessage}
               loginUser={this.loginUser} />
           )} />
-          <Route path='/equipment' render={() => (
-            <EquipmentList
-              equipments={this.state.equipments}
-              isAuthenticated={isAuthenticated}
-              getCurrentUser={this.getCurrentUser}
-            />
-          )} />
+
           <Route path='/equipment/create' render={() => (
              <EquipmentForm
               createFlashMessage={this.createFlashMessage}
               saved={this.state.saved} />
             
           )} />
-          <Route path='/destinations/' render={() => (
-            <DestinationList
+          <Route path='/equipment' render={() => (
+            <EquipmentList
               createFlashMessage={this.createFlashMessage}
-              saved={this.state.saved} />
+              saved={this.state.saved}
+            />
           )} />
+          
+
           <Route path='/destinations/create' render={() => (
             isAuthenticated
             ? <DestinationForm
@@ -292,6 +296,13 @@ class App extends Component {
               saved={this.state.saved} />
             : <Redirect to={{ pathname: '/login' }} />
           )} />
+          <Route path='/destinations/' render={() => (
+            <DestinationList
+              createFlashMessage={this.createFlashMessage}
+              saved={this.state.saved} />
+          )} />
+
+
           <Route path='/trips/create' render={() => (
             isAuthenticated
             ? <TripForm

@@ -6,7 +6,7 @@ class EquipmentForm extends Component {
     super(props);
     this.state = {
       errors: {},
-      added_by: '',
+      addedBy: '',
       month: '',
       year: '',
       days: '',
@@ -30,7 +30,7 @@ class EquipmentForm extends Component {
     });
   }
   render () {
-    const { added_by, month, year, days } = this.state;
+    const { addedBy, month, year, days } = this.state;
     return (
       <div className="row">
         <div className="col-md-6">
@@ -43,7 +43,7 @@ class EquipmentForm extends Component {
             className='form-horizontal'>
             <div className='form-group'>
               <label
-                htmlFor='added_by'
+                htmlFor='addedBy'
                 className='col-md-2 control-label'>
                 Added By
               </label>
@@ -51,9 +51,9 @@ class EquipmentForm extends Component {
                 <input
                   type='text'
                   className='form-control'
-                  id='added_by'
-                  name='added_by'
-                  value={added_by}
+                  id='addedBy'
+                  name='addedBy'
+                  value={addedBy}
                   onChange={this.handleInputChange} />
               </div>
             </div>

@@ -6,7 +6,7 @@ class DestinationForm extends Component {
     super(props);
     this.state = {
       errors: {},
-      added_by: '',
+      addedBy: '',
       location: '',
       summary: '',
       detail: '',
@@ -30,7 +30,7 @@ class DestinationForm extends Component {
     });
   }
   render () {
-    const { added_by, location, summary, detail } = this.state;
+    const { addedBy, location, summary, detail } = this.state;
     return (
       <div className="row">
         <div className="col-md-6">
@@ -43,7 +43,7 @@ class DestinationForm extends Component {
             className='form-horizontal'>
             <div className='form-group'>
               <label
-                htmlFor='added_by'
+                htmlFor='addedBy'
                 className='col-md-2 control-label'>
                 User
               </label>
@@ -51,9 +51,9 @@ class DestinationForm extends Component {
                 <input
                   type='text'
                   className='form-control'
-                  id='added_by'
-                  name='added_by'
-                  value={added_by}
+                  id='addedBy'
+                  name='addedBy'
+                  value={addedBy}
                   onChange={this.handleInputChange} />
               </div>
             </div>

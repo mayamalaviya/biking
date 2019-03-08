@@ -1,7 +1,7 @@
 exports.up = (knex) => {
   return knex.schema.createTable('trips', (table) => {
     table.increments();
-    table.integer('user_id').notNullable();
+    table.integer('user_id').unsigned();
     table.string('name');
     table.string('state').notNullable();
     table.string('country').notNullable().default('USA');

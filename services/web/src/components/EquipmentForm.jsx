@@ -9,10 +9,10 @@ class EquipmentForm extends Component {
       item: '',
       make: '',
       model: '',
-      year_bought: '',
-      primary_user: '',
-      usage_quantity: '',
-      usage_unit: '',
+      yearBought: '',
+      primaryUser: '',
+      usageQuantity: '',
+      usageUnit: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -33,7 +33,7 @@ class EquipmentForm extends Component {
     });
   }
   render () {
-    const { item, make, model, year_bought, primary_user, usage_quantity, usage_unit } = this.state;
+    const { item, make, model, yearBought, primaryUser, usageQuantity, usageUnit } = this.state;
     return (
       <div className="row">
         <div className="col-md-6">
@@ -94,7 +94,7 @@ class EquipmentForm extends Component {
             </div>
             <div className='form-group'>
               <label
-                htmlFor='year_bought'
+                htmlFor='yearBought'
                 className='col-md-2 control-label'>
                 Year Bought
               </label>
@@ -102,15 +102,15 @@ class EquipmentForm extends Component {
                 <input
                   type='text'
                   className='form-control'
-                  id='year_bought'
-                  name='year_bought'
-                  value={year_bought}
+                  id='yearBought'
+                  name='yearBought'
+                  value={yearBought}
                   onChange={this.handleInputChange} />
               </div>
             </div>
             <div className='form-group'>
               <label
-                htmlFor='primary_user'
+                htmlFor='primaryUser'
                 className='col-md-2 control-label'>
                 Primary User
               </label>
@@ -118,15 +118,15 @@ class EquipmentForm extends Component {
                 <input
                   type='text'
                   className='form-control'
-                  id='primary_user'
-                  name='primary_user'
-                  value={primary_user}
+                  id='primaryUser'
+                  name='primaryUser'
+                  value={primaryUser}
                   onChange={this.handleInputChange} />
               </div>
             </div>
             <div className='form-group'>
               <label
-                htmlFor='usage_quantity'
+                htmlFor='usageQuantity'
                 className='col-md-2 control-label'>
                 Usage
               </label>
@@ -134,15 +134,15 @@ class EquipmentForm extends Component {
                 <input
                   type='text'
                   className='form-control'
-                  id='usage_quantity'
-                  name='usage_quantity'
-                  value={usage_quantity}
+                  id='usageQuantity'
+                  name='usageQuantity'
+                  value={usageQuantity}
                   onChange={this.handleInputChange} />
               </div>
             </div>
             <div className='form-group'>
               <label
-                htmlFor='usage_unit'
+                htmlFor='usageUnit'
                 className='col-md-2 control-label'>
                 Unit
               </label>
@@ -150,9 +150,9 @@ class EquipmentForm extends Component {
                 <input
                   type='text'
                   className='form-control'
-                  id='usage_unit'
-                  name='usage_unit'
-                  value={usage_unit}
+                  id='usageUnit'
+                  name='usageUnit'
+                  value={usageUnit}
                   onChange={this.handleInputChange} />
               </div>
             </div>

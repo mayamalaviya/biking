@@ -4,15 +4,15 @@ import EquipmentCard from './EquipmentCard';
 const EquipmentList = (props) => {
   return (
     <div className="text-center">
-      {props.equipments.map(equipment => (
+      {props.equipment.map(item => (
         <EquipmentCard
-          item={equipment.item}
-          make={equipment.make}
-          model={equipment.model}
-          yearBought={equipment.year_bought}
-          primaryUser={equipment.primary_user}
-          usageQuantity={equipment.usage_quantity}
-          usageUnit={equipment.usage_unit}
+          item={item.item}
+          make={item.make}
+          model={item.model}
+          yearBought={item.yearBought}
+          primaryUser={item.primaryUser}
+          usageQuantity={item.usageQuantity}
+          usageUnit={item.usageUnit}
           saveEquipment={props.saveEquipment}
         />
       ))}

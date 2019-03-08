@@ -13,10 +13,10 @@ const EquipmentCard = (props) => {
               <td>{props.item}</td>
               <td>{props.make}</td>
               <td>{props.model}</td>
-              <td>{props.year_bought}</td>
-              <td>{props.primary_user}</td>
-              <td>{props.usage_quantity}</td>
-              <td>{props.usage_unit}</td>
+              <td>{props.yearBought}</td>
+              <td>{props.primaryUser}</td>
+              <td>{props.usageQuantity}</td>
+              <td>{props.usageUnit}</td>
             </tr>
           </table>
         </div>

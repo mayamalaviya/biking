@@ -4,8 +4,8 @@ exports.up = (knex) => {
     table.string('item').notNullable();
     table.string('make').notNullable();
     table.string('model').notNullable();
-    table.integer('year_bought').notNullable();
-    table.string('primary_user').notNullable();
+    table.integer('year_bought');
+    table.string('primary_user');
     table.integer('usage_quantity').unsigned();
     table.string('usage_unit');
 

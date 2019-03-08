@@ -1,7 +1,8 @@
 exports.up = (knex) => {
   return knex.schema.createTable('destinations', (table) => {
     table.increments();
-    table.string('added_by').notNullable();
+    table.string('name');
+    table.string('addded_by');
     table.integer('trip_id').unsigned();
     table.foreign('trip_id').references('trips.id');
     table.string('summary');
@@ -13,6 +14,6 @@ exports.up = (knex) => {
 
 exports.down = (knex) => {
   return knex.schema
-  .dropForeign('trips_id')
+  .dropForeign('trip_id')
   .dropTable('destinations');
 };

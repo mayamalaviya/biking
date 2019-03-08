@@ -27,10 +27,10 @@ router.get('/trips/user', routeHelpers.ensureAuthenticated, (req, res, next) => 
 
 router.get('/equipment', (req, res, next) => {
   return queries.getEquipments()
-  .then((equipments) => {
+  .then((equipment) => {
     res.json({
       status: 'success',
-      data: equipments,
+      data: equipment,
     });
   })
   .catch((err) => { return next(err); });
