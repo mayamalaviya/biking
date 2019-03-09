@@ -274,8 +274,9 @@ class App extends Component {
               createFlashMessage={this.createFlashMessage}
               loginUser={this.loginUser} />
           )} />
-
-          <Route path='/equipment/create' render={() => (
+          <PrivateRoute exact path='/equipment/create' component={EquipmentForm} />
+          <PrivateRoute exact path='/equipment/:id' component={EquipmentForm} />
+          <Route path='/equipment/c' render={() => (
              <EquipmentForm
               createFlashMessage={this.createFlashMessage}
               saved={this.state.saved} />

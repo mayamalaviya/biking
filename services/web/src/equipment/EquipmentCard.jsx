@@ -17,6 +17,10 @@ const EquipmentCard = (props) => {
               <td>{props.primaryUser}</td>
               <td>{props.usageQuantity}</td>
               <td>{props.usageUnit}</td>
+              <td><button 
+                onClick={()=>this.props.dispatch({type:'DELETE_EQUIPMENT',id:this.props.equipment.id})}>
+                Delete</button>
+              </td>
             </tr>
           </table>
         </div>
