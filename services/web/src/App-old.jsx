@@ -5,17 +5,17 @@ import axios from 'axios'
 import './App.css';
 
 import SearchBar from './components/SearchBar';
-import TripList from './components/TripList';
+import TripList from './trips/TripList';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import FlashMessages from './components/FlashMessages';
 import NotFound from './components/NotFound';
 import SavedTrips from './components/SavedTrips';
-import DestinationForm from './components/DestinationForm';
-import DestinationList from './components/DestinationForm';
-import EquipmentForm from './components/EquipmentForm';
-import EquipmentList from './components/EquipmentList';
-import TripForm from './components/TripForm';
+import DestinationForm from './destinations/DestinationForm';
+import DestinationList from './destinations/DestinationForm';
+import EquipmentForm from './equipment/EquipmentForm';
+import EquipmentList from './equipment/EquipmentList';
+import TripForm from './trips/TripForm';
 
 class App extends Component {
   constructor (props) {

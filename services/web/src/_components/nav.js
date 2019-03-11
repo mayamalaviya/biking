@@ -11,7 +11,7 @@ import { userActions } from '../_actions';
 import { connect } from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home';
 import LogoutIcon from '@material-ui/icons/HighlightOff';
-import VendorIcon from '@material-ui/icons/CardTravel';
+import DestinationsIcon from '@material-ui/icons/CardTravel';
 
 const drawerWidth = 240;
 

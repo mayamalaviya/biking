@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TripCard = (props) => {
+const DestinationCard = (props) => {
   return (
     <div className='col-md-4'>
       <div className='panel panel-info'>
@@ -23,4 +23,4 @@ const TripCard = (props) => {
   )
 }
 
-export default TripCard;
+export default DestinationCard;

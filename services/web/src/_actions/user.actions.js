@@ -1,4 +1,4 @@
-import { userService } from '../_services/';
+import { userService } from '../_services';
 import { history } from '../_helpers';
 
 export const userActions = {

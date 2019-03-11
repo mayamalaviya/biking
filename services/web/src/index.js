@@ -1,27 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './index.css';
+import App from './App';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import reducer from './_reducers';
 
-import App from './App.jsx';
+import registerServiceWorker from './registerServiceWorker';
 
-import { createStore } from 'redux';
-
-import tripReducer from './reducers/tripReducer';
-import destinationReducer from './reducers/destinationReducer';
-import equipmentReducer from './reducers/equipmentReducer';
-
-const store = createStore(destinationReducer, equipmentReducer, tripReducer);
-
-const router = (
-  <Router>
-    <Route component={App} />
-  </Router>
-)
+const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-  <Provider store={store}>
-  <App />
-  </Provider>,
-  router,
-  document.getElementById('root')
-)
+    <Provider store={store}>
+        <App />
+    </Provider>
+, document.getElementById('root'));
+registerServiceWorker();

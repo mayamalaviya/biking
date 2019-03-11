@@ -3,7 +3,7 @@ const equipmentReducer = (state = [], action) => {
 }
 export default equipmentReducer;
 
-import { userService } from '../_services/';
+import { userService } from '../_services';
 import { history } from '../_helpers';
 
 
@@ -79,7 +79,7 @@ function deleteEquipmentById(id){
 
 export function changeEquipmentList(equipment){
     return{
-        type: "FETECHED_ALL_VENDOR",
+        type: "FETECHED_ALL_EQUIPMENT",
         equipment: equipment
     }
 }
@@ -94,7 +94,7 @@ export function handleOnChangeProps(props, value){
 
 export function editEquipmentDetails(equipment){
     return{
-        type: "VENDOR_DETAIL",
+        type: "EQUIPMENT_DETAIL",
         id: equipment._id,
         name: equipment.name,
         mobile: equipment.mobile,
@@ -117,6 +117,6 @@ export function createUserInfo(){
 
 export function deleteEquipmentDetails(){
     return{
-        type: "DELETED_VENDOR_DETAILS"
+        type: "DELETED_EQUIPMENT_DETAILS"
     }
 }
