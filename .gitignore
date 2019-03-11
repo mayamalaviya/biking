@@ -10,5 +10,11 @@ build
 # misc
 .DS_Store
 .env
-npm-debug.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+
 _ignore
