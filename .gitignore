@@ -15,6 +15,8 @@ build
 .env.test.local
 .env.production.local
 
+*-old*
+
 npm-debug.log*
 
 _ignore
