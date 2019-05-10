@@ -6,6 +6,7 @@ import { history } from './_helpers';
 import { PrivateRoute } from './_components/PrivateRoute';
 import DestinationForm from './destinations/DestinationForm';
 import EquipmentForm from './equipment/EquipmentForm';
+import { Login } from './login';
 import { Home } from './home';
 import TripForm from './trips/TripForm';
 
@@ -16,6 +17,7 @@ class App extends Component {
         <Router history = {history}>
           <div>
             <Switch>
+              <PrivateRoute exact path = '/' component = { Login } />
               <PrivateRoute exact path = '/home' component={ Home } />
               <PrivateRoute exact path = 'destinations/create' component={DestinationForm} />
               <PrivateRoute exact path = 'equipment/create' component={EquipmentForm} />
@@ -23,20 +25,6 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
       </div>
     );
   }
