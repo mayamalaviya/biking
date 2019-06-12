@@ -16,6 +16,8 @@ build
 .env.production.local
 
 journal/*
+web/*
+swagger/*
 
 *-old*
 

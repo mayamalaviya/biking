@@ -12,8 +12,8 @@ test(`users should be able to log in and out`, async (t) => {
   // login
   await t
     .navigateTo('http://localhost:3007')
-    .typeText('input[name="username"]', 'michael')
-    .typeText('input[name="password"]', 'herman')
+    .typeText('input[name="username"]', 'maya')
+    .typeText('input[name="password"]', 'malaviya')
     .click(Selector('button[type="submit"]'));
 
   // logout
