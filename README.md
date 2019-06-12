@@ -1,10 +1,9 @@
 # Biking
----
 ### Setting Up Microservices - Node, Express, React, and Docker
 ---
 
 ## Architecture
----
+
 | Name | Service | Container | Tech | Status |
 | --- | --- | --- | --- | --- |
 | Web  | Web | web | React, Redux | In progress |
@@ -15,7 +14,7 @@
 | Functional Tests | Test | n/a | TestCafe |
 
 ## Setup
----
+
 1. Fork/Clone this repo
 2. Download Docker and/or confirm version >= 18:
 ```
