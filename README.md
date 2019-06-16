@@ -37,7 +37,7 @@ When the apps are up, run:
 ```
 $ sh init_db.sh
 ```
-### Poke Around...
+### Look Around
 #### Users - <http://localhost:3000>
 | Endpoint | HTTP Method | CRUD Method | Result |
 | --- | --- | --- | --- |
