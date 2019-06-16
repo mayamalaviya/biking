@@ -15,8 +15,7 @@ build
 .env.test.local
 .env.production.local
 
-journal/*
-*/web/*
+services/web/web/
 swagger/*
 
 *-old*
