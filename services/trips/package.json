@@ -4,10 +4,10 @@
     "test": "./node_modules/mocha/bin/_mocha 'app/tests/**/*.test.js'"
   },
   "dependencies": {
-    "body-parser": "^1.17.1",
+    "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.3",
     "debug": "^2.6.6",
-    "express": "^4.15.2",
+    "express": "^4.18.2",
     "knex": "^0.13.0",
     "morgan": "^1.8.1",
     "pg": "^6.1.5",
